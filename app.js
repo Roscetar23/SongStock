@@ -8,7 +8,7 @@ const app = express();
 app.get("/", (req,res)=>{
     //res.send("App funcionando");
 
-    res.sendFile(path.join(__dirname, "html", "basic.html"));
+    res.sendFile(path.join(__dirname,"src", "html", "inicio.html"));
 });
 
 app.listen(3000, ()=> {
