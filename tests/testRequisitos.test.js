@@ -21,9 +21,9 @@ const mysql = require('mysql');
 //         connectionStub.query = sinon.stub().callsArgWith(2, null, 'Resultado de inserción');
 
 //         // Llamar a la función de registro de usuario
-//         registrarUsuario('oscar', '123', 'correo@example.com', (err, result) => {
+//         registrarUsuario('oscar2', '123', 'oscar@gmail.com', (err, result) => {
 //             // Verificar que la función de inserción en la base de datos fue llamada con los datos proporcionados
-//             sinon.assert.calledOnceWithExactly(connectionStub.query, 'INSERT INTO usuarios (nombreUsuario, contrasena, correoUsuario) VALUES (?, ?, ?)', ['oscar', '123', 'correo@example.com']);
+//             sinon.assert.calledOnceWithExactly(connectionStub.query, 'INSERT INTO usuarios (nombreUsuario, contrasena, correoUsuario) VALUES (?, ?, ?)', ['oscar', '1234', 'correo@example.']);
 
 //             // Verificar que no haya ocurrido ningún error
 //             assert.strictEqual(err, null);
@@ -33,7 +33,7 @@ const mysql = require('mysql');
 //         });
 //     });
 
-// });
+//  });
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //Test de inicio 
