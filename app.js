@@ -2,11 +2,13 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const registroUsuario = require('./src/registroUsuario');
+const inicioSesion = require('./src/InicioSesion');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Metodo POST Registro
 app.post("/registro", (req, res) => {
   const { nombreUsuario, contrasena, correoUsuario } = req.body;
 
@@ -19,8 +21,44 @@ app.post("/registro", (req, res) => {
   });
 });
 
+
+//Metodo POST inicio
+
+app.post("/Inicio", (req, res) => {
+    const { nombreUsuario, contrasena } = req.body;
+  
+    
+    inicioSesion.iniciarSesion(nombreUsuario, contrasena, (err, result) => {
+      if (err) {
+        console.error('Error al iniciar sesión:', err);
+        res.status(500).send('Error interno del servidor');
+        return;
+      }
+      
+      
+      if (result && result.length > 0) {
+        // Redirigir al usuario a index.html si las credenciales son válidas
+        res.redirect("/index");
+      } else {
+        // Redirigir al usuario de nuevo a la página de inicio de sesión si las credenciales no son válidas
+        res.redirect("/inicioSesion");
+      }
+    });
+  });
+
+  // cierre de sesión 
+
+  app.post("/cerrarSesion", (req, res) => {
+    
+    res.clearCookie("sessionId"); 
+    
+    
+    res.redirect("/Home");
+});
+
+
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "src", "html", "inicio.html"));
+    res.sendFile(path.join(__dirname, "src", "html", "Home.html"));
 });
 
 app.get("/:nombreArchivo", (req, res) => {

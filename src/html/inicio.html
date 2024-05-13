@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SongStock</title>
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Asegúrate de que la ruta sea correcta -->
 </head>
 <body>
-    
-    <h1>SongStock tu servicio de musica online</h1>
+    <h2>Iniciar Sesión</h2>
 
-    <a href="/Registro">Registro</a>
+    <form action="/Inicio" method="post">
+        <label for="nombreUsuario">Nombre de Usuario:</label>
+        <input type="text" id="nombreUsuario" name="nombreUsuario" required><br>
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required><br>
+
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+
+    <p>No tienes una cuenta? <a href="/registro">Regístrate aquí</a></p> 
 
 </body>
 </html>
