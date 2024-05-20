@@ -13,7 +13,7 @@ connection.connect((err) => {
     console.error('Error de conexión a la base de datos:', err);
     return;
   }
-  console.log('Conexión exitosa a la base de datos');
+  console.log('Conexión exitosa a la base de registro');
 });
 
 function registrarUsuario(nombreUsuario, contrasena, correoUsuario, callback) {
