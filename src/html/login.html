@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<script src="https://kit.fontawesome.com/a7f45f355e.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>SongStock - Iniciar Sesión o Registrarse</title>
+    <style>
+body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            width: 1000px; /* Ancho entre cajas */
+            margin: 100px auto;
+
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px; /* Espacio en las cajas de forma vertical*/
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px; /* Ancho de las cajas */
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px; /* Espacio linea y textos */
+        }
+        form {
+            display: flex; 
+            flex-direction: column; /* Direccion para que caiga en columna*/
+        }
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #808080; /* Color gris */
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #696969; /* Cambia color a un gris más oscuro */
+        }
+
+        .barra-superior {
+            background-color: #1e1f21; /* Color de fondo de la barra */
+            height: 100px; /* Altura de la barra */
+            width: 100%; /* Ancho de la barra */
+            position: fixed; /* Barra fija en la parte superior */
+            top: 0; /* Colocar la barra en la parte superior */
+            left: 0; /* Alinear la barra a la izquierda */
+            z-index: -1000; /* Barra al fondo */
+        }
+.icon {
+    position: relative;
+    left: 10px;
+    top: 107px;
+}
+
+.icon2 {
+    position: relative;
+    left: 553px;
+    top: 88px;
+}
+
+.icon3 {
+    position: relative;
+    left: 533px;
+    top: 140px;
+}
+.icon4 {
+    position: relative;
+    left: 512px;
+    top: 193px;
+}
+.icon5 {
+    position: relative;
+    left: -70px;
+    top: 160px;
+}
+
+.input-field {
+    padding-left: 40px; /* Espacio para iconos */
+}
+
+.letra-o h2 {
+            display: block; /* Hace que la letra "O" sea un bloque */
+            text-align: center; /* Alinea el texto al centro */
+            margin-top: 100px; /* Espacio superior */
+            border-bottom: none; /* Elimina la línea debajo de la letra "O" */
+        }
+
+    </style>
+</head>
+<body>
+    <img src="/img/icono.png" width="190px"/>
+    <div class="barra-superior"></div>
+    <div class="container">
+        <div class="form-container">
+<i class="fas fa-envelope icon">
+</i>
+<i class="fas fa-envelope icon2">
+</i>
+<i class="fa-solid fa-key icon3">
+</i>
+<i class="fa-solid fa-at icon4">
+</i>
+<i class="fa-solid fa-key icon5">
+</i>
+
+            <h2>Iniciar Sesión</h2>
+            <form action="/Inicio" method="post">
+            <form id="LoginSS">
+                <input class="input-field" type="text" placeholder="Nombre de usuario" id="nombreUsuario" name="nombreUsuario" required>
+                <input class="input-field" type="password" placeholder="Contraseña" id="contrasena" name="contrasena" required>
+                <button id="botonIniciarSesion" type="submit">Iniciar Sesión</button>
+            </form>
+        </form>
+        </div>
+
+        <div class="letra-o">
+            <h2>O</h2>
+        </div>
+    
+        <div class="form-container">
+            <form action="/registro" method="post">
+            <h2>Registrarse</h2>
+            <form id="RegistroS">
+                <input class= "input-field" type="text" placeholder="Nombre de usuario" id="nombreUsuario" name="nombreUsuario" required>
+                <input class="input-field" type="password" placeholder="Contraseña" id="contrasena" name="contrasena" required>  
+                <input class="input-field" type="email" placeholder="Correo Electronico" id="correoUsuario" name="correoUsuario" required>
+                <button id="botonRegistro" type="submit">Registrarse</button>
+            </form>
+        </form>
+        </div>
+    </div>
+
+    <script>
+         var LoginSS = document.getElementById('LoginSS');
+         LoginSS.addEventListener('submit', function(event) {
+            event.preventDefault();
+        window.location.href = 'index.html';
+    });
+    </script>
+     <script>
+        var RegistroS = document.getElementById('RegistroS');
+        RegistroS.addEventListener('submit', function(event) {
+           event.preventDefault();
+       window.location.href = 'login.html';
+   });
+   </script>
+</body>
+</html>

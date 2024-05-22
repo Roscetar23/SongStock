@@ -15,6 +15,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'src')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
     secret: 'your-secret-key',
@@ -119,6 +120,7 @@ app.get("/:nombreArchivo", (req, res) => {
     const rutaArchivo = path.join(__dirname, "src", "html", `${nombreArchivo}.html`);
     res.sendFile(rutaArchivo);
 });
+
 
 const port = 3000;
 app.listen(port, () => {

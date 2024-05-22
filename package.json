@@ -16,7 +16,8 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "mysql": "^2.18.1",
-    "sinon": "^17.0.2"
+    "sinon": "^17.0.2",
+    "static": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^5.1.1",
