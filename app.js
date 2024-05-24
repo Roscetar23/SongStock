@@ -85,16 +85,17 @@ app.post("/addSong", (req, res) => {
   });
 });
 //---------------------------------------------------------------------------------------
-// Agregar canciones al carrito
-app.post("/addToCart", (req, res) => {
-  const productId = req.body.productId;
+// Agrega canciones al carrito 
+app.post('/addToCart/:productId', (req, res) => {
+  const productId = req.params.productId;
 
-  addToCart.addToCart(productId, (err, result) => {
-    if (err){
-      res.status(500).send('Error interno del servidor');
-      return;
-    }
-    res.status(200).json({ message: 'Producto añadido al carrito correctamente'});
+  // Aquí debes llamar a tu función addToCart pasando el productId
+  addToCart(productId, (err, result) => {
+      if (err) {
+          res.status(500).send('Error interno del servidor');
+          return;
+      }
+      res.redirect("/index");
   });
 });
 //-------------------------------------------------------------------------------------

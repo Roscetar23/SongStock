@@ -66,7 +66,11 @@
                     row.innerHTML = `
                         <td>${song.nombre}</td>
                         <td>${song.precio}</td>
-                        <td><button class="addToCartBtn" data-id="${song.id}">Añadir al carrito</button></td>
+                        <td>
+                            <form id="addSongCart" action="/addToCart" method="post">    
+                        <button class="addToCartBtn" data-id="${song.id}">Añadir al carrito</button>
+                            </form>
+                        </td>
                     `;
                     songsBody.appendChild(row);
                 });
@@ -92,16 +96,15 @@ function addToCart(productId) {
     })
     .then(response => {
         if (response.ok) {
-            console.log('Canción agregada al carrito correctamente');
+            console.log('Producto agregado al carrito correctamente');
         } else {
-            console.error('Error al agregar canción al carrito');
+            console.error('Error al agregar producto al carrito');
         }
     })
     .catch(error => {
         console.error('Error de red:', error);
     });
 }
-
     </script>
     
 </body>
