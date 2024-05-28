@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <script src="https://kit.fontawesome.com/a7f45f355e.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <title>SongStock - Administrador</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: flex;
+      justify-content: space-around;
+      width: 1000px;
+      margin: 100px auto;
+    }
+    .form-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+    }
+    form {
+      display: flex; 
+      flex-direction: column;
+    }
+    input {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
+    button {
+      padding: 10px;
+      background-color: #808080;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #696969;
+    }
+    .barra-superior {
+      background-color: #1e1f21;
+      height: 100px;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1000;
+    }
+    .icon {
+      position: relative;
+      left: 10px;
+      top: 107px;
+    }
+    .icon2 {
+      position: relative;
+      left: 553px;
+      top: 88px;
+    }
+    .icon3 {
+      position: relative;
+      left: 533px;
+      top: 140px;
+    }
+    .icon4 {
+      position: relative;
+      left: 512px;
+      top: 193px;
+    }
+    .icon5 {
+      position: relative;
+      left: -70px;
+      top: 160px;
+    }
+    .input-field {
+      padding-left: 40px;
+    }
+    .letra-o h2 {
+      display: block;
+      text-align: center;
+      margin-top: 100px;
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <img src="/img/icono.png" width="190px"/>
+  <div class="barra-superior"></div>
+  <div class="container">
+    <div class="form-container">
+      <h2>Iniciar Sesión Administrador</h2>
+      <form action="/InicioAdmin" method="post" id="LoginSS">
+        <input class="input-field" type="text" placeholder="Nombre de usuario" id="nombreUsuario" name="nombreUsuario" required>
+        <input class="input-field" type="password" placeholder="Contraseña" id="contrasena" name="contrasena" required>
+        <button id="botonIniciarSesion" type="submit">Iniciar Sesión</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.getElementById('LoginSS').addEventListener('submit', function(event) {
+      event.preventDefault();
+      this.submit();
+    });
+  </script>
+</body>
+</html>

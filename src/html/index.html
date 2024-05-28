@@ -1,111 +1,179 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de inicio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .catalog-container, .songs-container, .cart-container {
+            margin-bottom: 20px;
+        }
+        select, table, ul, button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <h1>Bienvenido a SongStock</h1>
-    <div id="products">
-        <h2>Productos</h2>
-        <form id="addSongForm" action="/addSong" method="post">
-            <label for="songName">Nombre de la canción:</label>
-            <input type="text" id="songName" name="songName">
-            <label for="songPrice">Precio:</label>
-            <input type="text" id="songPrice" name="songPrice">
-            <button type="submit">Añadir canción</button>
-        </form>
 
-        <!-- Mostrar canciones -->
-        <div id="songsContainer">
-            <h2>Canciones</h2>
-            <form id="getCancionesForm" action="/getCanciones" method="get">
-                <button type="submit">Obtener canciones</button>
-            </form>
-            <table id="songsTable">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody id="songsBody">
-                    <!-- Aquí se agregarán las filas de la tabla con JavaScript -->
-                </tbody>
-            </table>
-        </div>
+    <!-- Contenedor de catálogos -->
+    <div class="catalog-container">
+        <h2>Seleccionar Catálogo</h2>
+        <select id="catalogSelect">
+            <option value="">Seleccione un catálogo</option>
+        </select>
     </div>
+
+    <!-- Contenedor de canciones -->
+    <div class="songs-container">
+        <h2>Canciones</h2>
+        <form id="getCancionesForm" action="/getCanciones" method="get">
+            <button type="submit">Obtener canciones</button>
+        </form>
+        <table id="songsTable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="songsBody">
+                <!-- Aquí se agregarán las filas de la tabla con JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Contenedor del carrito de compras -->
     <div id="cart">
         <h2>Carrito de Compras</h2>
         <ul id="cart-items"></ul>
         <button id="checkout-button">Checkout</button>
     </div>
 
+    <!-- Formulario de cerrar sesión -->
     <form action="/cerrarSesion" method="post">
         <button type="submit">Cerrar sesión</button>
     </form>
+
+    <!-- Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-    const getCancionesForm = document.getElementById('getCancionesForm');
-    const songsBody = document.getElementById('songsBody');
-    
-    getCancionesForm.addEventListener('submit', (event) => {
-        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-        
-        fetch('/getCanciones')
-            .then(response => response.json())
-            .then(data => {
-                // Limpiar la tabla antes de agregar las nuevas canciones
-                songsBody.innerHTML = '';
-                
-                // Agregar cada canción a la tabla
-                data.forEach(song => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${song.nombre}</td>
-                        <td>${song.precio}</td>
-                        <td>
-                            <form id="addSongCart" action="/addToCart" method="post">    
-                        <button class="addToCartBtn" data-id="${song.id}">Añadir al carrito</button>
-                            </form>
-                        </td>
-                    `;
-                    songsBody.appendChild(row);
+            const catalogSelect = document.getElementById('catalogSelect');
+            const songsBody = document.getElementById('songsBody');
+
+            // Obtener y poblar la lista de catálogos
+            fetch('/catalogos')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(catalogo => {
+                        const option = document.createElement('option');
+                        option.value = catalogo.id;
+                        option.textContent = catalogo.nombre;
+                        catalogSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al obtener catálogos:', error);
                 });
+
+            // Manejar el cambio de selección del catálogo
+            catalogSelect.addEventListener('change', (event) => {
+                const catalogoId = event.target.value;
+
+                if (!catalogoId) {
+                    songsBody.innerHTML = '';
+                    return;
+                }
+
+                fetch(`/catalogos/${catalogoId}/canciones`)
+                    .then(response => response.json())
+                    .then(data => {
+                        songsBody.innerHTML = '';
+                        data.forEach(song => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${song.nombre}</td>
+                                <td>${song.precio}</td>
+                                <td>
+                                    <button class="addToCartBtn" data-id="${song.id}">Añadir al carrito</button>
+                                </td>
+                            `;
+                            songsBody.appendChild(row);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener canciones del catálogo:', error);
+                    });
+            });
+
+            // Obtener todas las canciones cuando se envía el formulario
+            const getCancionesForm = document.getElementById('getCancionesForm');
+            getCancionesForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                fetch('/getCanciones')
+                    .then(response => response.json())
+                    .then(data => {
+                        songsBody.innerHTML = '';
+                        data.forEach(song => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${song.nombre}</td>
+                                <td>${song.precio}</td>
+                                <td>
+                                    <button class="addToCartBtn" data-id="${song.id}">Añadir al carrito</button>
+                                </td>
+                            `;
+                            songsBody.appendChild(row);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener canciones:', error);
+                    });
+            });
+
+            // Delegar evento de clic para los botones "Añadir al carrito"
+            songsBody.addEventListener('click', (event) => {
+                const target = event.target;
+                if (target.classList.contains('addToCartBtn')) {
+                    const productId = target.dataset.id;
+                    addToCart(productId);
+                }
+            });
+        });
+
+        function addToCart(productId) {
+            fetch(`/addToCart/${productId}`, {
+                method: 'POST'
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Producto agregado al carrito correctamente');
+                } else {
+                    console.error('Error al agregar producto al carrito');
+                }
             })
             .catch(error => {
-                console.error('Error al obtener canciones:', error);
+                console.error('Error de red:', error);
             });
-    });
-
-    // Delegar evento de clic para los botones "Añadir al carrito"
-    songsBody.addEventListener('click', (event) => {
-        const target = event.target;
-        if (target.classList.contains('addToCartBtn')) {
-            const productId = target.dataset.id;
-            addToCart(productId);
         }
-    });
-});
-
-function addToCart(productId) {
-    fetch(`/addToCart/${productId}`, {
-        method: 'POST'
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Producto agregado al carrito correctamente');
-        } else {
-            console.error('Error al agregar producto al carrito');
-        }
-    })
-    .catch(error => {
-        console.error('Error de red:', error);
-    });
-}
     </script>
-    
 </body>
 </html>

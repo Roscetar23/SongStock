@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de inicio Administrador</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            width: 300px;
+            margin: auto;
+            padding-top: 20px;
+        }
+        input, textarea, button, select {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        .form-section {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido a SongStock(Administrador)</h1>
+
+    <div class="form-container">
+        <div class="form-section">
+            <h2>Crear Catálogo</h2>
+            <form action="/crearCatalogo" method="post">
+                <input type="text" name="nombre" placeholder="Nombre del Catálogo" required>
+                <textarea name="descripcion" placeholder="Descripción" required></textarea>
+                <button type="submit">Crear Catálogo</button>
+            </form>
+        </div>
+
+        <div class="form-section">
+            <h2>Agregar Canción</h2>
+            <form id="addSongForm" action="/agregarCancionCatalogo" method="post">
+                <input type="text" name="titulo" placeholder="Título" required>
+                <input type="text" name="artista" placeholder="Artista" required>
+                <input type="text" name="album" placeholder="Álbum">
+                <input type="number" name="ano" placeholder="Año">
+                <select name="catalogoId" id="catalogoId" required>
+                    <option value="">Seleccione un catálogo</option>
+                </select>
+                <button type="submit">Agregar Canción</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="products">
+        <h2>Productos</h2>
+        <form id="addSongForm" action="/addSong" method="post">
+            <label for="songName">Nombre de la canción:</label>
+            <input type="text" id="songName" name="songName">
+            <label for="songPrice">Precio:</label>
+            <input type="text" id="songPrice" name="songPrice">
+            <button type="submit">Añadir canción</button>
+        </form> 
+
+        <div id="songsContainer">
+            <h2>Canciones</h2>
+            <form id="getCancionesForm" action="/getCanciones" method="get">
+                <button type="submit">Obtener canciones</button>
+            </form>
+            <table id="songsTable">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="songsBody">
+                    <!-- Aquí se agregarán las filas de la tabla con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <form action="/cerrarSesion" method="post">
+        <button type="submit">Cerrar sesión</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const getCancionesForm = document.getElementById('getCancionesForm');
+            const songsBody = document.getElementById('songsBody');
+            const catalogoSelect = document.getElementById('catalogoId');
+
+            // Obtener y poblar la lista de catálogos
+            fetch('/catalogos')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(catalogo => {
+                        const option = document.createElement('option');
+                        option.value = catalogo.id;
+                        option.textContent = catalogo.nombre;
+                        catalogoSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al obtener catálogos:', error);
+                });
+
+            getCancionesForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                fetch('/getCanciones')
+                    .then(response => response.json())
+                    .then(data => {
+                        songsBody.innerHTML = '';
+
+                        data.forEach(song => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${song.nombre}</td>
+                                <td>${song.precio}</td>
+                                <td>
+                                    <button class="addToCartBtn" data-id="${song.id}">Añadir al carrito</button>
+                                </td>
+                            `;
+                            songsBody.appendChild(row);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener canciones:', error);
+                    });
+            });
+
+            songsBody.addEventListener('click', (event) => {
+                const target = event.target;
+                if (target.classList.contains('addToCartBtn')) {
+                    const productId = target.dataset.id;
+                    addToCart(productId);
+                }
+            });
+        });
+
+        function addToCart(productId) {
+            fetch(`/addToCart/${productId}`, {
+                method: 'POST'
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Producto agregado al carrito correctamente');
+                } else {
+                    console.error('Error al agregar producto al carrito');
+                }
+            })
+            .catch(error => {
+                console.error('Error de red:', error);
+            });
+        }
+    </script>
+</body>
+</html>
