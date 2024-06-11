@@ -221,13 +221,11 @@ describe('Pruebas para la función addToCart', function() {
 //---------------------------------------------------------------------------------------------------------------------------------------
 
 function agregarCancionC(nombreCancion, precio, callback) {
-  // Base de datos simulada en memoria
   const productos = [
     { nombre: 'Canción 1', precio: 10 },
     { nombre: 'Canción 2', precio: 15 }
   ];
 
-  // Simular consulta SELECT
   const found = productos.find(producto => producto.nombre === nombreCancion);
 
   if (found) {
@@ -236,7 +234,6 @@ function agregarCancionC(nombreCancion, precio, callback) {
     return;
   }
 
-  // Simular inserción en la base de datos
   const newProduct = { nombre: nombreCancion, precio: precio };
   productos.push(newProduct);
   const result = { insertId: productos.length };
@@ -266,13 +263,12 @@ describe('Pruebas para la función agregarCancionCatalogo', function() {
 
 
 function adminLogin(username, password, callback) {
-  // Datos simulados en memoria
+  
   const admins = [
     { username: 'admin1', password: 'password123' },
     { username: 'admin2', password: 'password456' }
   ];
 
-  // Simular búsqueda de administrador
   const admin = admins.find(admin => admin.username === username);
 
   if (!admin) {
@@ -281,7 +277,6 @@ function adminLogin(username, password, callback) {
     return;
   }
 
-  // Simular verificación de contraseña
   if (admin.password !== password) {
     const error = new Error('Contraseña incorrecta');
     callback(error);
