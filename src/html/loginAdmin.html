@@ -16,7 +16,7 @@
       display: flex;
       justify-content: space-around;
       width: 1000px;
-      margin: 100px auto;
+      margin: 150px auto;
     }
     .form-container {
       background-color: #fff;
@@ -24,6 +24,8 @@
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       width: 300px;
+  position: relative;
+
     }
     h2 {
       text-align: center;
@@ -53,57 +55,62 @@
       background-color: #696969;
     }
     .barra-superior {
-      background-color: #1e1f21;
-      height: 100px;
-      width: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1000;
+      background-color: #1e1f21; 
+        height: 100px;
+        width: 100%; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        z-index: 1000; 
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between; 
     }
     .icon {
-      position: relative;
-      left: 10px;
-      top: 107px;
+      position: absolute;
+  top: 110px; 
+  left: 35px; 
+  z-index: 1;
     }
     .icon2 {
-      position: relative;
-      left: 553px;
-      top: 88px;
+      position: absolute;
+  top: 160px; 
+  left: 35px;
+  z-index: 1;
     }
-    .icon3 {
-      position: relative;
-      left: 533px;
-      top: 140px;
-    }
-    .icon4 {
-      position: relative;
-      left: 512px;
-      top: 193px;
-    }
-    .icon5 {
-      position: relative;
-      left: -70px;
-      top: 160px;
-    }
+
     .input-field {
       padding-left: 40px;
     }
-    .letra-o h2 {
-      display: block;
-      text-align: center;
-      margin-top: 100px;
-      border-bottom: none;
-    }
+    .inicio {
+        color: white; 
+        font-size: 18px; 
+        font-weight: bold; 
+        text-decoration: none; 
+        position: absolute;
+        top: 50%; 
+        transform: translateY(-50%); 
+        right: 80px;
+    
+      }
   </style>
 </head>
 <body>
+  
+  <div class="barra-superior">
   <img src="/img/icono.png" width="190px"/>
-  <div class="barra-superior"></div>
+  <a href="/Home" class="inicio">
+    <i class="fa-solid fa-house"></i> Inicio
+</a>
+</div>
   <div class="container">
     <div class="form-container">
-      <h2>Iniciar Sesión Administrador</h2>
+      <i class="fa-solid fa-user icon"></i>
+      <i class="fa-solid fa-key icon2">
+      </i>
+      <h2>Inicio Admin</h2>
       <form action="/InicioAdmin" method="post" id="LoginSS">
+        
         <input class="input-field" type="text" placeholder="Nombre de usuario" id="nombreUsuario" name="nombreUsuario" required>
         <input class="input-field" type="password" placeholder="Contraseña" id="contrasena" name="contrasena" required>
         <button id="botonIniciarSesion" type="submit">Iniciar Sesión</button>

@@ -18,7 +18,7 @@ connection.connect((err) => {
   console.log('Conexión exitosa a la base vista catalogo');
 });
 
-// Obtener la lista de catálogos con sus canciones
+// obtener la lista de catalogos con las canciones
 router.get('/catalogos', (req, res) => {
     const sql = 'SELECT * FROM catalogos';
     connection.query(sql, (err, results) => {

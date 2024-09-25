@@ -138,7 +138,7 @@ app.post("/Inicio", (req, res) => {
   //---------------------------------------------------------------------------------------
 
 
-  // cierre de sesión 
+  // cierre de sesion 
 
   app.post("/cerrarSesion", (req, res) => {
     
@@ -166,7 +166,6 @@ app.post("/addSong", (req, res) => {
 app.post('/addToCart/:productId', (req, res) => {
   const productId = req.params.productId;
 
-  // Aquí debes llamar a tu función addToCart pasando el productId
   addToCart(productId, (err, result) => {
       if (err) {
           res.status(500).send('Error interno del servidor');

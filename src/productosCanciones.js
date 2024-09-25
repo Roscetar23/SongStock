@@ -17,7 +17,7 @@ connection.connect((err) => {
 });
 
 function agregarCancion(nombreCancion, precio, callback) {
-    // Verificar si la canción ya existe
+    // verificar si la cancion ya existe
     connection.query('SELECT * FROM productos WHERE nombre = ?', nombreCancion, (err, rows) => {
       if (err) {
         console.error('Error al buscar canción en la base de datos:', err);
@@ -26,13 +26,12 @@ function agregarCancion(nombreCancion, precio, callback) {
       }
   
       try {
-        // Si ya hay una canción con el mismo nombre, devuelve un error
         if (rows.length > 0) {
           const error = new Error('La canción ya existe');
           throw error;
         }
   
-        // Si no hay canciones con el mismo nombre, procede a insertar la nueva canción
+        // si no hay canciones con el mismo nombre, inserta la nueva cancion
         const sql = 'INSERT INTO productos (nombre, precio) VALUES (?, ?)';
         connection.query(sql, [nombreCancion, precio], (err, result) => {
           if (err) {

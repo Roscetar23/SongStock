@@ -1,16 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <script
+      src="https://kit.fontawesome.com/a7f45f355e.js"
+      crossorigin="anonymous"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SongStock</title>
-</head>
-<body>
-    
-    <h1>SongStock tu servicio de musica online</h1>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        display: flex;
+        justify-content: space-around;
+        width: 700px;
+        margin: 60px auto;
+        padding: 20px; 
+      }
 
-    <a href="/login">Inicio de sesión o Registro</a>
-    <a href="/loginAdmin">Inicio de sesión Administrador</a>
+      button:hover {
+        background-color: #696969;
+      }
 
-</body>
+      .rectangle-9 {
+        width: 100%;
+        height: 100px;
+        padding: 8px;
+        background: #ffffff;
+        color: #000000;
+        border-color: #f4f4f4;
+        opacity: 80%;
+        border-width: 3px;
+        border-style: solid;
+        font-family: "Helvetica";
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.3;
+        text-align: center;
+        display: flex; 
+        justify-content: flex-start; 
+        align-items: center; 
+        gap: 20px; 
+      }
+
+      .barra {
+        width: fit-content;
+        color: #444444;
+        font-family: "Source Sans 3", sans-serif;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 2;
+        text-align: left;
+        margin-left: 220px;
+      }
+      .barra a {
+        color: inherit; /* heredar color del texto del contenedor */
+        text-decoration: none; 
+      }
+      .barra-superior {
+        background-color: #1e1f21;
+        height: 100px;
+        width: 100%;
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        z-index: 1000; /* barra al fondo */
+      }
+      .iniciar-sesion {
+        color: white; 
+        font-size: 18px; 
+        font-weight: bold; 
+        text-decoration: none; 
+        position: absolute;
+        top: 50%; 
+        transform: translateY(-50%); 
+        right: 20px;
+      }
+      .logo {
+        position: relative;
+        z-index: 1001;
+      }
+
+      .icon {
+        margin-right: 10px;
+      }
+      .salto {
+        text-align: center;
+        color: #696969;
+      }
+      .iniciar-sesion:hover {
+            background-color: #696969;
+        }
+    </style>
+  </head>
+
+  <body>
+    <img src="/img/icono.png" width="190px" class="logo" />
+    <div class="barra-superior">
+      <a href="/login" class="iniciar-sesion">
+        <i class="fa-regular fa-user icon"></i>Iniciar sesión</a>
+    </div>
+    <div class="rectangle-9">
+      <div class="barra">
+        <a href="/login"><h2>Productos</h2></a>
+      </div>
+      <div class="barra">
+        <a href="/login"><h2>Promociones</h2></a>
+      </div>
+      <div class="barra">
+        <a href="/login"><h2>Descubrir</h2></a>
+      </div>
+      <div class="barra">
+        <a href="/login"><h2>Biblioteca</h2></a>
+      </div>
+      <div class="barra">
+        <a href="/login"><h2>Vender</h2></a>
+      </div>
+    </div>
+    <div class="container">
+      <h1>Animate a descubrir nuestro catalogo</h1>
+    </div>
+    <h2 class="salto">¡Inicia sesion para poder ver los catalogos!</h2>
+    <a href="/loginAdmin">Si eres vendedor inicia sesión aqui!</a>
+  </body>
 </html>

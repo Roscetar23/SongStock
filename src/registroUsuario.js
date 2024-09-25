@@ -17,7 +17,7 @@ connection.connect((err) => {
 });
 
 function registrarUsuario(nombreUsuario, contrasena, correoUsuario, callback) {
-    // Verificar si el correo electrónico ya está en uso
+    // verificar si el correo ya esta en uso
     connection.query('SELECT * FROM usuarios WHERE correoUsuario = ?', correoUsuario, (err, rows) => {
       if (err) {
         console.error('Error al buscar usuario en la base de datos:', err);
@@ -26,13 +26,13 @@ function registrarUsuario(nombreUsuario, contrasena, correoUsuario, callback) {
       }
   
       try {
-        // Si ya hay un usuario con el mismo correo electrónico, devuelve un error
+        // si ya hay un usuario con el mismo correo, devuelve un error
         if (rows.length > 0) {
           const error = new Error('El correo electrónico ya está registrado');
           throw error;
         }
   
-        // Si no hay usuarios con el mismo correo electrónico, procede a insertar el nuevo usuario
+        // si no hay usuarios con el mismo correo, inserta el nuevo usuario
         const sql = 'INSERT INTO usuarios (nombreUsuario, contrasena, correoUsuario) VALUES (?, ?, ?)';
         connection.query(sql, [nombreUsuario, contrasena, correoUsuario], (err, result) => {
           if (err) {

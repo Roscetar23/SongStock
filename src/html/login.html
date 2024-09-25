@@ -15,26 +15,26 @@ body {
         .container {
             display: flex;
             justify-content: space-around;
-            width: 1000px; /* Ancho entre cajas */
-            margin: 100px auto;
+            width: 1000px;
+            margin: 150px auto;
 
         }
         .form-container {
             background-color: #fff;
-            padding: 20px; /* Espacio en las cajas de forma vertical*/
+            padding: 20px; 
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px; /* Ancho de las cajas */
+            width: 300px; /* ancho de las cajas */
         }
         h2 {
             text-align: center;
             color: #333;
             border-bottom: 1px solid #ddd;
-            padding-bottom: 10px; /* Espacio linea y textos */
+            padding-bottom: 10px; /* espacio linea y textos */
         }
         form {
             display: flex; 
-            flex-direction: column; /* Direccion para que caiga en columna*/
+            flex-direction: column; /* direccion para que caiga en columna*/
         }
         input {
             margin-bottom: 15px;
@@ -45,24 +45,28 @@ body {
 
         button {
             padding: 10px;
-            background-color: #808080; /* Color gris */
+            background-color: #808080; 
             color: white;
             border: none;
             border-radius: 3px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #696969; /* Cambia color a un gris más oscuro */
+            background-color: #696969; 
         }
 
         .barra-superior {
-            background-color: #1e1f21; /* Color de fondo de la barra */
-            height: 100px; /* Altura de la barra */
-            width: 100%; /* Ancho de la barra */
-            position: fixed; /* Barra fija en la parte superior */
-            top: 0; /* Colocar la barra en la parte superior */
-            left: 0; /* Alinear la barra a la izquierda */
-            z-index: -1000; /* Barra al fondo */
+            background-color: #1e1f21; 
+        height: 100px; 
+        width: 100%; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        z-index: 1000; 
+        display: flex; /* flexbox para alinear elementos */
+        align-items: center; /* alinear verticalmente los elementos */
+        justify-content: space-between; /* alinear elementos a la derecha */
+        
         }
 .icon {
     position: relative;
@@ -93,21 +97,38 @@ body {
 }
 
 .input-field {
-    padding-left: 40px; /* Espacio para iconos */
+    padding-left: 40px; 
 }
 
 .letra-o h2 {
-            display: block; /* Hace que la letra "O" sea un bloque */
-            text-align: center; /* Alinea el texto al centro */
-            margin-top: 100px; /* Espacio superior */
-            border-bottom: none; /* Elimina la línea debajo de la letra "O" */
+            display: block; /* hace que la o sea un bloque */
+            text-align: center; /* alinea el texto al centro */
+            margin-top: 100px; /* espacio superior */
+            border-bottom: none; 
         }
+        .inicio {
+        color: white; 
+        font-size: 18px; 
+        font-weight: bold; 
+        text-decoration: none; /* quitar subrayado del enlace */
+        position: absolute;
+        top: 50%; /* ajustar la posición verticalmente */
+        transform: translateY(-50%); /* corregir la posición vertical */
+        right: 80px;
+    
+      }
 
     </style>
 </head>
 <body>
-    <img src="/img/icono.png" width="190px"/>
-    <div class="barra-superior"></div>
+    
+    <div class="barra-superior">
+        <img src="/img/icono.png" width="190px"/>
+        <a href="/Home" class="inicio">
+            <i class="fa-solid fa-house"></i> Inicio
+        </a>
+    </div>
+
     <div class="container">
         <div class="form-container">
 <i class="fas fa-envelope icon">

@@ -1,46 +1,167 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script
+    src="https://kit.fontawesome.com/a7f45f355e.js"
+    crossorigin="anonymous"
+  ></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de inicio Administrador</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0; 
+            background-color: #f4f4f4;
         }
+        
         .form-container {
             width: 300px;
-            margin: auto;
-            padding-top: 20px;
+            background-color: #fff;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
-        input, textarea, button, select {
+        textarea, .button2 {
             width: 100%;
             margin-bottom: 10px;
             padding: 10px;
+            box-sizing: border-box; 
         }
+        textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;   
+        }
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;   
+        }
+        select {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;   
+        }
+        button {
+            padding: 10px;
+            background-color: #808080; 
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #696969; 
+        }
+
         .form-section {
             margin-bottom: 20px;
             border: 1px solid #ddd;
             padding: 15px;
             border-radius: 5px;
         }
+         /* css JD */
+    .barra-superior {
+        background-color: #1e1f21;
+            height: 100px;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex; /*alinear elementos*/
+            align-items: center; /*alinear elementos vertical*/
+            justify-content: space-between; /*distribuir espacio entre elementos*/
+            padding: 0 20px;
+            box-sizing: border-box;
+            position: relative;
+      }
+      .logo {
+        position: relative;
+        z-index: 1001;
+      }
+      .icon {
+        margin-right: 5px;
+      }
+      .cerrar-sesion {
+        color: white; 
+        font-size: 18px; 
+        font-weight: bold; 
+        text-decoration: none; /* quitar subrayado del enlace */
+        position: absolute;
+        top: 50%; /* ajustar la posición verticalmente */
+        transform: translateY(-50%); /* corregir la posición vertical */
+        right: 20px;
+      }
+      .salto {
+        text-align: center;
+        color: #696969;
+      }
+      .textoh2 {
+            text-align: center;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px; /* espacio linea y textos */
+        }
+        #products {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#songsContainer {
+    width: 100%;
+    text-align: center;
+}
+
+#songsTable {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+#songsTable th, #songsTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#songsTable th {
+    background-color: #f2f2f2;
+}
+
+
     </style>
 </head>
 <body>
-    <h1>Bienvenido a SongStock(Administrador)</h1>
+   
+    <div class="barra-superior">
+        <img src="/img/icono.png" width="180px" class="logo" />
+        <a href="/Home" class="cerrar-sesion"> 
+            <i class="fa-solid fa-right-from-bracket icon"></i>
+            Cerrar sesión </a>
+    </div>
+    <h1 class="salto">Interfaz administrador SongStock</h1>
 
     <div class="form-container">
         <div class="form-section">
-            <h2>Crear Catálogo</h2>
+            <h2 class="textoh2">Crear Catálogo</h2>
             <form action="/crearCatalogo" method="post">
                 <input type="text" name="nombre" placeholder="Nombre del Catálogo" required>
                 <textarea name="descripcion" placeholder="Descripción" required></textarea>
-                <button type="submit">Crear Catálogo</button>
+                <button class="button2" type="submit">Crear Catálogo</button>
             </form>
         </div>
+    </div>   
 
+    <div class="form-container">
         <div class="form-section">
-            <h2>Agregar Canción</h2>
+            <h2 class="textoh2">Agregar Canción</h2>
             <form id="addSongForm" action="/agregarCancionCatalogo" method="post">
                 <input type="text" name="titulo" placeholder="Título" required>
                 <input type="text" name="artista" placeholder="Artista" required>
@@ -49,13 +170,14 @@
                 <select name="catalogoId" id="catalogoId" required>
                     <option value="">Seleccione un catálogo</option>
                 </select>
-                <button type="submit">Agregar Canción</button>
+                <button class="button2" type="submit">Agregar Canción</button>
             </form>
         </div>
     </div>
+    </div>
 
-    <div id="products">
-        <h2>Productos</h2>
+    <div class="salto" id="products">
+        <h2>Añadir canciones</h2>
         <form id="addSongForm" action="/addSong" method="post">
             <label for="songName">Nombre de la canción:</label>
             <input type="text" id="songName" name="songName">
@@ -65,7 +187,7 @@
         </form> 
 
         <div id="songsContainer">
-            <h2>Canciones</h2>
+            <h2>Canciones en Stock</h2>
             <form id="getCancionesForm" action="/getCanciones" method="get">
                 <button type="submit">Obtener canciones</button>
             </form>
@@ -78,15 +200,10 @@
                     </tr>
                 </thead>
                 <tbody id="songsBody">
-                    <!-- Aquí se agregarán las filas de la tabla con JavaScript -->
                 </tbody>
             </table>
         </div>
     </div>
-
-    <form action="/cerrarSesion" method="post">
-        <button type="submit">Cerrar sesión</button>
-    </form>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -94,7 +211,7 @@
             const songsBody = document.getElementById('songsBody');
             const catalogoSelect = document.getElementById('catalogoId');
 
-            // Obtener y poblar la lista de catálogos
+            // Obtener y llenar el catalogo
             fetch('/catalogos')
                 .then(response => response.json())
                 .then(data => {
@@ -122,6 +239,10 @@
                             row.innerHTML = `
                                 <td>${song.nombre}</td>
                                 <td>${song.precio}</td>
+                                <td>
+                                    <button class="addToCartBtn" data-id="${song.id}">Añadir al carrito</button>
+                                </td>
+                            
                             `;
                             songsBody.appendChild(row);
                         });
